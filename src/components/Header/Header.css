@@ -1,0 +1,23 @@
+.header-movies {
+    padding-top: 0;
+}
+
+.header__nav-movies {
+    margin-bottom: 70px;
+}
+
+@media screen and (max-width: 768px) {
+    .header-movies {
+        padding-top: 18px;
+    }
+
+    .header__nav-movies {
+        margin-bottom: 99px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .header__nav-movies {
+        margin-bottom: 103px;
+    }
+}

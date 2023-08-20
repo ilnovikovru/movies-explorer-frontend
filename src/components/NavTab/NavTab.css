@@ -1,0 +1,155 @@
+.header-movies__menu-container {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  position: relative;
+}
+
+.header-movies__menu-link {
+  margin: 0;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 1.38;
+  text-decoration: none;
+  color: #000;
+}
+
+.header-movies__profile-button {
+  width: 120px;
+  height: 62px;
+  margin-top: 9.5px;
+  margin-bottom: 3px;
+  border: 0;
+  background-image: url('../../images/account-button.svg');
+  background-repeat: no-repeat;
+  background-color: #fff;
+}
+
+.header-movies__menu {
+  display: none;
+}
+
+/* Стили для попапа */
+.header-movies__menu-popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 67.7%;
+  height: 100vh;
+  background-color: #fff;
+  z-index: 10;
+}
+
+.header-movies__menu-popup_active {
+  display: flex;
+  flex-direction: column;
+  padding-top: 159px;
+}
+
+.header-movies__close-menu {
+  display: block;
+  position: absolute;
+  top: 22.44px;
+  right: 22.44px;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border: 0;
+  background-image: url('../../images/menu-close.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.header-movies__mobile-menu-container {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.header-movies__mobile-menu-link {
+  margin: 0;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.2;
+  text-decoration: none;
+  color: #000;
+  margin-bottom: 24px;
+}
+
+.header-movies__mobile-menu-profile-button {
+  width: 120px;
+  height: 62px;
+  border: 0;
+  background-image: url('../../images/account-button.svg');
+  background-position: top;
+  background-repeat: no-repeat;
+  background-color: #fff;
+  align-self: center;
+  margin-top: 271px;
+}
+
+@media screen and (max-width: 768px) {
+  .header-movies__menu-link {
+    display: none;
+  }
+
+  .header-movies__profile-button {
+    display: none;
+  }
+
+  .header-movies__menu {
+    display: block;
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    border: 0;
+    background-image: url('../../images/menu.svg');
+    background-size: 38px 38px;
+    background-position: 100% 20%;
+    background-repeat: no-repeat;
+    background-color: #fff;
+  }
+
+  .header-movies__close-menu {
+    top: 18.44px;
+    right: 18.44px;
+  }
+
+  .header-movies__mobile-menu-link {
+    margin-bottom: 29px;
+  }
+
+  .header-movies__mobile-menu-profile-button {
+    position: fixed;
+    bottom: 72px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .header-movies__menu-popup {
+    width: 100%;
+  }
+
+  .header-movies__mobile-menu-profile-button {
+    bottom: 28px;
+  }
+
+  .header-movies__close-menu {
+    top: 10px;
+    right: 10px;
+  }
+
+  .header-movies__menu-popup_active {
+    display: flex;
+    flex-direction: column;
+    padding-top: 145px;
+  }
+
+  .header-movies__mobile-menu-link {
+    margin-bottom: 25px;
+  }
+
+}
