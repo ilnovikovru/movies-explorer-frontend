@@ -4,14 +4,14 @@ import './SearchForm.css';
 function SearchForm() {
   return (
     <section className='main__search-form'>
-      <div className='main__search-form-container'>
-        <h1 className='main__search-form-title'>Фильм</h1>
+      <form className='main__search-form-container'>
+        <input className='main__search-form-title' placeholder='Фильм' required></input>
         <button className='main__search-form-button'>Найти</button>
-      </div>
+      </form>
       <div className='main__search-form-switch-container'>
-        <label className='main__search-form-switch'>{/* надо исправить */}
+        <label className='main__search-form-switch'>
           <input type='checkbox' className='main__search-form-input' defaultChecked />
-          <span className='main__search-form-slider main__search-form-slider-round'></span>{/* надо исправить */}
+          <span className='main__search-form-slider main__search-form-slider-round'></span>
         </label>
         <p className='main__search-form-label'>Короткометражки</p>
       </div>

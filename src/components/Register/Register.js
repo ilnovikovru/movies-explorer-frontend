@@ -13,11 +13,11 @@ function Register() {
                         <h1 className='main__sign-title'>Добро пожаловать!</h1>
                         <form className='main__sign-form'>
                             <p className='main__sign-input-label'>Имя</p>
-                            <input className='main__sign-input' ></input>
+                            <input className='main__sign-input' required></input>
                             <p className='main__sign-input-label'>E-mail</p>
-                            <input className='main__sign-input'></input>
+                            <input className='main__sign-input' required></input>
                             <p className='main__sign-input-label'>Пароль</p>
-                            <input className='main__sign-input' type='password'></input>
+                            <input className='main__sign-input' type='password' required></input>
                             <span className='main__sign-input-error'>Что-то пошло не так...</span>
                         </form>
                         <div className='main__sign-links'>

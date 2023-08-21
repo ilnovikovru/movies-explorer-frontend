@@ -86,6 +86,15 @@
     }
 }
 
+@media screen and (max-width: 600px) {
+    .main__techs-container {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        width: 190px;
+        margin: 0 auto;
+    }
+}
+
 @media screen and (max-width: 320px) {
     .main__techs {
         background-color: #fff;
@@ -112,12 +121,5 @@
         line-height: 1.45;
         margin-bottom: 50px;
         width: 100%;
-    }
-
-    .main__techs-container {
-        flex-wrap: wrap;
-        justify-content: flex-start;
-        width: 190px;
-        margin: 0 auto;
     }
 }

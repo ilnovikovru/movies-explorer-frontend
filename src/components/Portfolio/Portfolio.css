@@ -28,7 +28,8 @@
     border-bottom: 1px solid #E8E8E8;
     background-image: url('../../images/link-arrow.svg');
     background-repeat: no-repeat;
-    background-position: 99.4% 36%;
+    background-position: calc(100% - 10px) 36%;
+    padding-right: 25px;
 }
 
 .main__portfolio-link {
@@ -52,6 +53,20 @@
     }
 }
 
+@media screen and (max-width: 370px) {
+    .main__portfolio-list-item {
+        background-size: 15px 12px;
+        background-position: 100% 20%;
+        margin-bottom: 18px;
+    }
+
+    .main__portfolio-link {
+        font-size: 18px;
+        line-height: 1.55;
+        margin-bottom: 19px;
+    }
+}
+
 @media screen and (max-width: 320px) {
     .main__portfolio {
         padding-right: 18px;
@@ -63,17 +78,4 @@
         line-height: 1.4;
         margin-bottom: 39px;
     }
-
-    .main__portfolio-link {
-        font-size: 18px;
-        line-height: 1.55;
-        margin-bottom: 19px;
-    }
-
-    .main__portfolio-list-item {
-        background-size: 15px 12px;
-        background-position: 100% 20%;
-        margin-bottom: 18px;
-    }
-
 }

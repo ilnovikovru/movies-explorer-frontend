@@ -11,7 +11,9 @@ function Promo() {
         <img src={logo} className='logo header-landing__logo' alt='Проект' />
         <div className='header-landing__sign-container'>
           <Link to='/signup' className='header-landing__signout-link'>Регистрация</Link>
-          <button className='header-landing__signin-button'>Войти</button>
+          <Link to='/signin'>
+            <button className='header-landing__signin-button'>Войти</button>
+          </Link>
         </div>
       </section>
       <section className='header-landing__title-container'>

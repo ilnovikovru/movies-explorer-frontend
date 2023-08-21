@@ -23,6 +23,7 @@
   background-image: url('../../images/account-button.svg');
   background-repeat: no-repeat;
   background-color: #fff;
+  cursor: pointer;
 }
 
 .header-movies__menu {

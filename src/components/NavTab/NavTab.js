@@ -15,7 +15,9 @@ function NavTab() {
         <Link to='/movies' className='header-movies__menu-link'>Фильмы</Link>
         <Link to='/saved-movies' className='header-movies__menu-link'>Сохранённые фильмы</Link>
       </div>
-      <button className='header-movies__profile-button'></button>
+      <Link to='/profile'>
+        <button className='header-movies__profile-button'></button>
+      </Link>
       <button className='header-movies__menu' onClick={toggleMenu}></button>
       <div className={`header-movies__menu-popup ${isMenuOpen ? 'header-movies__menu-popup_active' : ''}`}>
         <button className='header-movies__close-menu' onClick={toggleMenu}></button>
