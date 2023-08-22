@@ -8,16 +8,18 @@
     padding: 0 0 155px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1088px) {
     .main__saved-movies-cards-list {
         grid-template-columns: repeat(2, calc(50% - 15px));
         grid-template-rows: repeat(1, 269px);
         gap: 30px 30px;
         padding: 0 0 102px;
+        padding-left: calc(50% - 354px);	
+        padding-right: calc(50% - 354px);
     }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 617px) {
     .main__saved-movies-cards-list {
         grid-template-columns: repeat(1, 100%);
         grid-template-rows: repeat(2, 240px);

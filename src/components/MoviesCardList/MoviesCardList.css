@@ -70,6 +70,9 @@
     cursor: pointer;
 }
 
+.main__movies-cards-list-more:hover {
+    opacity: 0.8;
+}
 
 @media screen and (max-width: 1088px) {
     .main__movies-cards-list {
@@ -141,21 +144,3 @@
         padding: 0 0 67px;
     }
 }
-
-/* @media screen and (max-width: 879px) {
-    .elements__list {
-      grid-template-columns: repeat(2, 282px);
-      grid-template-rows: repeat(3, 378px);
-      padding-bottom: 50px;
-      padding-left: calc(50% - 290px);
-    }
-  }
-  
-  @media screen and (max-width: 617px) {
-    .elements__list {
-      grid-template-columns: 282px;
-      grid-template-rows: 361px;
-      gap: 15px;
-      padding-left: calc(50% - 141px);
-    }
-  } */
