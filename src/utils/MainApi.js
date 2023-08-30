@@ -1,5 +1,5 @@
 import { JWT_TOKEN_KEY } from "./constants";
-const MAIN_API_URL = 'http://localhost:3001';
+const MAIN_API_URL = process.env.REACT_APP_API || 'http://localhost:3001';
 
 const handleResponse = (response) => {
   if (!response.ok) {
