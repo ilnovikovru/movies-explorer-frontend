@@ -114,6 +114,15 @@
     background-color: #fff;
   }
 
+  .header-movies__menu_main {
+    background-color: #073042;
+    background-image: url('../../images/menu-main.svg');
+  }
+
+  .header-landing__sign-container {
+    display: none;
+  }
+
   .header-movies__close-menu {
     top: 18.44px;
     right: 18.44px;

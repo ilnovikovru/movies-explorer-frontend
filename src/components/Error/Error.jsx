@@ -1,8 +1,8 @@
-import React from 'react';
 import './Error.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Error() {
+    const navigate = useNavigate()
     return (
         <>
             <main className='main'>
@@ -11,7 +11,7 @@ function Error() {
                         <h1 className='main__error-title'>404</h1>
                         <p className='main__error-text'>Страница не найдена</p>
                     </div>
-                    <Link className='main__error-link' to='/'>Назад</Link>
+                    <Link className='main__error-link' onClick={() => navigate(-1)}>Назад</Link>
                 </section>
             </main>
         </>

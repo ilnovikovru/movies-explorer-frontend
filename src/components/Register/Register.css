@@ -53,6 +53,10 @@
     color: #FF3055;
 }
 
+.main__sign-api-error {
+    color: #FF3055;
+}
+
 .main__sign-links {
     margin: 0 auto;
     width: 396px;
@@ -77,6 +81,11 @@
     margin-top: 132px;
     border-radius: 3px;
     cursor: pointer;
+}
+
+.main__sign-button_disabled {
+    background-color: grey;
+    cursor: not-allowed;
 }
 
 .main__sign-login {

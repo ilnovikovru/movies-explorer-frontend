@@ -21,6 +21,7 @@
   line-height: 1.2;
   align-self: center;
   border: 0;
+  width: 100%;
 }
 
 .main__search-form-button {

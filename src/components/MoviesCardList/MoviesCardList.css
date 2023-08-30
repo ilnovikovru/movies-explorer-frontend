@@ -16,8 +16,9 @@
 
 .main__movies-card-image {
     width: 100%;
-    height: auto;
+    height: 151px;
     margin-bottom: 10px;
+    object-fit: cover;
 }
 
 .main__movies-cards-name {
@@ -37,14 +38,31 @@
 }
 
 .main__movies-card-like {
-    width: 10px;
-    height: 8.5px;
+    width: 24px;
+    height: 24px;
     padding: 0;
     border: 0;
     background-image: url('../../images/like.svg');
-    background-position: top;
+    background-position: 100% 100%;
     background-repeat: none;
     background-color: #fff;
+    cursor: pointer;
+}
+
+.main__movies-card-like_active {
+    background-image: url('../../images/like_active.svg');
+}
+
+.main__movies-card-save {
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    border: 0;
+    background-image: url('../../images/save.svg');
+    background-position: 100% 100%;
+    background-repeat: none;
+    background-color: #fff;
+    cursor: pointer;
 }
 
 .main__movies-card-time {
