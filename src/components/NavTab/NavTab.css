@@ -100,6 +100,10 @@
   margin-top: 271px;
 }
 
+.header-movies__mobile-menu-profile-button-link {
+  align-self: center;
+}
+
 @media screen and (max-width: 768px) {
   .header-movies__menu-link {
     display: none;

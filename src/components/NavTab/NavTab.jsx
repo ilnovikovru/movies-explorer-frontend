@@ -14,13 +14,13 @@ function NavTab() {
       <div className='header-movies__menu-container'>
         <NavLink 
           to='/movies' 
-          className={({ isActive })  => isActive ? 'header-movies__menu-link_active' : 'header-movies__menu-link' }
+          className={({ isActive })  => isActive ? 'header-movies__menu-link header-movies__menu-link_active' : 'header-movies__menu-link' }
         >
           Фильмы
         </NavLink>
         <NavLink 
           to='/saved-movies' 
-          className={({ isActive })  => isActive ? 'header-movies__menu-link_active' : 'header-movies__menu-link' }
+          className={({ isActive })  => isActive ? 'header-movies__menu-link header-movies__menu-link_active' : 'header-movies__menu-link' }
         >
           Сохранённые фильмы
         </NavLink>
@@ -35,18 +35,20 @@ function NavTab() {
           <Link to='/' className='header-movies__mobile-menu-link'>Главная</Link>
           <NavLink 
             to='/movies' 
-            className={({ isActive })  => isActive ? 'header-movies__mobile-menu-link_active' : 'header-movies__mobile-menu-link' }
+            className={({ isActive })  => isActive ? 'header-movies__mobile-menu-link header-movies__mobile-menu-link_active' : 'header-movies__mobile-menu-link' }
           >
             Фильмы
           </NavLink>
           <NavLink 
             to='/saved-movies' 
-            className={({ isActive })  => isActive ? 'header-movies__mobile-menu-link_active' : 'header-movies__mobile-menu-link' }
+            className={({ isActive })  => isActive ? 'header-movies__mobile-menu-link header-movies__mobile-menu-link_active' : 'header-movies__mobile-menu-link' }
           >
             Сохранённые фильмы
           </NavLink>
         </div>
-        <button className='header-movies__mobile-menu-profile-button'></button>
+        <Link to='/profile' className='header-movies__mobile-menu-profile-button-link'>
+          <button className='header-movies__mobile-menu-profile-button'></button>
+        </Link>
       </div>
     </>
   );
