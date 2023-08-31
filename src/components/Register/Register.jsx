@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { signup, signin } from '../../utils/MainApi';
 import './Register.css';
 import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../images/logo.svg';
@@ -7,7 +6,7 @@ import useFormWithValidation from '../../hooks/useFormWithValidation'; // Ука
 import validator from 'validator';
 import { JWT_TOKEN_KEY } from '../../utils/constants';
 
-function Register({ loggedIn, setLoggedIn }) {
+function Register({ loggedIn, setLoggedIn, api }) {
     const { values, handleChange, errors, isValid } = useFormWithValidation();
     const [apiError, setApiError] = useState('');
     const navigate = useNavigate();
@@ -24,11 +23,11 @@ function Register({ loggedIn, setLoggedIn }) {
         if (!isValid) return;
     
         try {
-            const signupResponse = await signup(values);
+            const signupResponse = await api.signup(values);
             
             // После успешной регистрации пытаемся авторизовать пользователя
             if (Object.keys(signupResponse).length) {
-                const signinResponse = await signin({
+                const signinResponse = await api.signin({
                     email: values.email,
                     password: values.password
                 });
@@ -54,7 +53,9 @@ function Register({ loggedIn, setLoggedIn }) {
             <main className='main'>
                 <section className='main__sign'>
                     <div className='main__sign-container'>
-                        <img src={logo} alt='' className='logo main__sign-logo' />
+                        <Link to='/'>
+                            <img src={logo} alt='' className='logo main__sign-logo' />
+                        </Link>
                         <h1 className='main__sign-title'>Добро пожаловать!</h1>
                         <form className='main__sign-form' onSubmit={handleSubmit}>
                             <p className='main__sign-input-label'>Имя</p>

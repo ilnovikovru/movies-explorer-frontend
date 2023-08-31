@@ -3,12 +3,11 @@ import './Login.css';
 import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../images/logo.svg';
 import useFormWithValidation from '../../hooks/useFormWithValidation'; 
-import { signin } from '../../utils/MainApi';
 import validator from 'validator';
 import { JWT_TOKEN_KEY } from '../../utils/constants';
 
 
-function Login({ loggedIn, setLoggedIn }) {
+function Login({ loggedIn, setLoggedIn, api }) {
     const { values, handleChange, errors, isValid } = useFormWithValidation();
     const [apiError, setApiError] = useState('');
     const navigate = useNavigate();
@@ -25,7 +24,7 @@ function Login({ loggedIn, setLoggedIn }) {
         if (!isValid) return;
     
         try {
-            const response = await signin(values);
+            const response = await api.signin(values);
             
             if (response.token) {
                 localStorage.setItem(JWT_TOKEN_KEY, response.token);
@@ -43,7 +42,9 @@ function Login({ loggedIn, setLoggedIn }) {
             <main className='main'>
                 <section className='main__sign'>
                     <div className='main__sign-container'>
-                        <img src={logo} alt='Вход' className='logo main__sign-logo' />
+                        <Link to='/'>
+                            <img src={logo} alt='Вход' className='logo main__sign-logo' />
+                        </Link>
                         <h1 className='main__sign-title'>Рады видеть!</h1>
                         <form className='main__sign-form' onSubmit={handleSubmit}>
                             <p className='main__sign-input-label'>E-mail</p>

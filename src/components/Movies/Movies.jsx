@@ -7,18 +7,18 @@ import SearchForm from '../SearchForm/SearchForm';
 import Preloader from '../Preloader/Preloader';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Footer from '../Footer/Footer';
-import { getMovies as getMainMovies, deleteMovie, addMovie } from '../../utils/MainApi';
 import { getMovies } from '../../utils/MoviesApi';
 import { MOVIES_API_URL } from '../../utils/MoviesApi';
-import { LS_KEY_FILTRED, LS_KEY_IS_SHORT, LS_KEY_MOVIES, LS_KEY_SEARCH } from '../../utils/constants';
+import { LS_KEY_FILTRED, LS_KEY_IS_SHORT, LS_KEY_MOVIES, LS_KEY_SEARCH, REQ_ERROR_MESSAGE } from '../../utils/constants';
+import { RECEIVED_COLOR } from 'jest-matcher-utils';
 
-function Movies({ loggedIn, movies, setMovies, savedMovies, setSavedMovies }) {
+function Movies({ loggedIn, api, movies, setMovies, savedMovies, setSavedMovies }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [searchTerm, setSearch] = useState(() => 
+  const [searchTerm, setSearch] = useState(() =>
     localStorage.getItem(LS_KEY_SEARCH) || ''
   );
-  const [isShortFilm, setIsShort] = useState(() => 
+  const [isShortFilm, setIsShort] = useState(() =>
     JSON.parse(localStorage.getItem(LS_KEY_IS_SHORT)) || false
   );
   const [filteredMovies, setFiltredMovies] = useState(() => {
@@ -26,26 +26,15 @@ function Movies({ loggedIn, movies, setMovies, savedMovies, setSavedMovies }) {
   })
 
   useEffect(() => {
-    const fetchSavedMovies = async () => {
-      const resp = await getMainMovies();
-      setSavedMovies(resp);
+    if (movies) {
+      localStorage.setItem(LS_KEY_MOVIES, JSON.stringify(movies))
     }
 
-    const fetchMovies = async () => {
-      const resp = await getMovies();
-      setMovies(resp);
+    if (searchTerm !== '') {
+      console.debug('search')
+      handleSearch(isShortFilm)
     }
 
-    if (loggedIn) {
-      fetchSavedMovies()
-      if (!movies.length) {
-        fetchMovies()
-      }
-    }
-  }, [loggedIn]);
-
-  useEffect(() => {
-    localStorage.setItem(LS_KEY_MOVIES, JSON.stringify(movies))
   }, [movies])
 
   useEffect(() => {
@@ -60,42 +49,62 @@ function Movies({ loggedIn, movies, setMovies, savedMovies, setSavedMovies }) {
     localStorage.setItem(LS_KEY_IS_SHORT, isShortFilm)
   }, [isShortFilm])
 
-  useEffect(() => {
-    if (searchTerm !== '') {
-      handleSearch(isShortFilm)
+  const fetchSavedMovies = async () => {
+    try {
+      setSavedMovies(await api.getMovies());
+    } catch (e) {
+      setError(REQ_ERROR_MESSAGE);
     }
-  }, [movies])
+  }
+
+  const fetchMovies = async () => {
+    setLoading(true);
+    try {
+      setMovies(await getMovies());
+    } catch (e) {
+      setError(REQ_ERROR_MESSAGE);
+    } finally {
+      setTimeout(() => setLoading(false), 600);
+    }
+  }
 
   const handleSearch = async (isShort) => {
+    console.debug({ movies, savedMovies })
     setLoading(true);
     setError('');
 
-    try {
-      const s = searchTerm.toLocaleLowerCase()
-      const filtered = movies.filter(({ duration, nameRU, nameEN }) => {
-        const short = (isShort ? duration <= 40 : true)
-        const ru = nameRU.toLowerCase()
-        const en = nameEN.toLowerCase()
-        return short && (ru.includes(s) || en.includes(s))
-      });
-
-      setFiltredMovies(filtered);
-
-      if (filtered.length === 0) {
-        setError('Ничего не найдено');
-      }
-    } catch (e) {
-      setError('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз');
-    } finally {
-      setLoading(false);
+    if (!savedMovies.length) {
+      console.debug('noSaved')
+      fetchSavedMovies()
     }
+
+    if (!movies.length) {
+      console.debug('noMovies')
+      return fetchMovies()
+    }
+
+    const s = searchTerm.toLocaleLowerCase();
+    const filtered = movies.filter(({ duration, nameRU, nameEN }) => {
+      const short = (isShort ? duration <= 40 : true)
+      const ru = nameRU.toLowerCase()
+      const en = nameEN.toLowerCase()
+      return short && (ru.includes(s) || en.includes(s))
+    });
+
+    if (filtered.length === 0) {
+      setError('Ничего не найдено');
+    }
+
+    setFiltredMovies(filtered);
+
+    setTimeout(() => setLoading(false), 300);
   };
 
   const handleDelete = async (movie) => {
     const [found] = savedMovies.filter(m => m.movieId === movie.id) || [null]
     if (found) {
       try {
-        await deleteMovie(found._id);
+        await api.deleteMovie(found._id);
         setSavedMovies(savedMovies.filter(({ _id }) => _id !== found._id))
       } catch (err) {
         console.log(err)
@@ -106,7 +115,7 @@ function Movies({ loggedIn, movies, setMovies, savedMovies, setSavedMovies }) {
   const handleSave = async (movie) => {
     const { id, created_at, updated_at, ...data } = movie;
     try {
-      const newMovie = await addMovie({
+      const newMovie = await api.addMovie({
         ...data,
         image: `${MOVIES_API_URL}${movie.image.url}`,
         thumbnail: `${MOVIES_API_URL}${movie.image.formats.thumbnail.url}`,

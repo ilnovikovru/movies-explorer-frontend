@@ -92,7 +92,7 @@
     opacity: 0.8;
 }
 
-@media screen and (max-width: 1088px) {
+@media screen and (max-width: 1279px) {
     .main__movies-cards-list {
         grid-template-columns: repeat(2, calc(50% - 15px));
         grid-template-rows: repeat(4, 269px);
@@ -116,7 +116,7 @@
     }
 }
 
-@media screen and (max-width: 617px) {
+@media screen and (max-width: 767px) {
     .main__movies-cards {
         padding-left: 10px;
         padding-right: 10px;

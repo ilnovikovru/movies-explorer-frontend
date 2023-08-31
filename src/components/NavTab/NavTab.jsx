@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './NavTab.css';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 function NavTab() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -12,8 +12,18 @@ function NavTab() {
   return (
     <>
       <div className='header-movies__menu-container'>
-        <Link to='/movies' className='header-movies__menu-link'>Фильмы</Link>
-        <Link to='/saved-movies' className='header-movies__menu-link'>Сохранённые фильмы</Link>
+        <NavLink 
+          to='/movies' 
+          className={({ isActive })  => isActive ? 'header-movies__menu-link_active' : 'header-movies__menu-link' }
+        >
+          Фильмы
+        </NavLink>
+        <NavLink 
+          to='/saved-movies' 
+          className={({ isActive })  => isActive ? 'header-movies__menu-link_active' : 'header-movies__menu-link' }
+        >
+          Сохранённые фильмы
+        </NavLink>
       </div>
       <Link to='/profile'>
         <button className='header-movies__profile-button'></button>
@@ -23,8 +33,18 @@ function NavTab() {
         <button className='header-movies__close-menu' onClick={toggleMenu}></button>
         <div className='header-movies__mobile-menu-container'>
           <Link to='/' className='header-movies__mobile-menu-link'>Главная</Link>
-          <Link to='/movies' className='header-movies__mobile-menu-link'>Фильмы</Link>
-          <Link to='/saved-movies' className='header-movies__mobile-menu-link'>Сохранённые фильмы</Link>
+          <NavLink 
+            to='/movies' 
+            className={({ isActive })  => isActive ? 'header-movies__mobile-menu-link_active' : 'header-movies__mobile-menu-link' }
+          >
+            Фильмы
+          </NavLink>
+          <NavLink 
+            to='/saved-movies' 
+            className={({ isActive })  => isActive ? 'header-movies__mobile-menu-link_active' : 'header-movies__mobile-menu-link' }
+          >
+            Сохранённые фильмы
+          </NavLink>
         </div>
         <button className='header-movies__mobile-menu-profile-button'></button>
       </div>

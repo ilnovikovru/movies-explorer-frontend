@@ -6,17 +6,20 @@ import SearchForm from '../SearchForm/SearchForm';
 import Footer from '../Footer/Footer';
 import NavTab from '../NavTab/NavTab';
 import MovieCard from '../MoviesCard/MoviesCard';
-import { getMovies, deleteMovie } from '../../utils/MainApi';
 
-function SavedMovies({ loggedIn, movies, setMovies }) {
+function SavedMovies({ loggedIn, api, movies, setMovies }) {
   const [filtredMovies, setFiltredMovies] = useState([]);
   const [searchTerm, setSearch] = useState('');
   const [isShortFilm, setIsShort] = useState(false);
 
   useEffect(() => {
     const fetchMovies = async () => {
-      const resp = await getMovies();
-      setMovies(resp);
+      try {
+        const resp = await api.getMovies();
+        setMovies(resp);
+      } catch (e) {
+        console.debug(e)
+      }
     }
 
     if (loggedIn) {
@@ -29,7 +32,7 @@ function SavedMovies({ loggedIn, movies, setMovies }) {
   }, [movies])
 
   const handleDelete = async (movie) => {
-    await deleteMovie(movie._id);
+    await api.deleteMovie(movie._id);
     setMovies(movies.filter(m => m._id !== movie._id));
   }
 

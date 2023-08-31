@@ -12,16 +12,19 @@ import Error from '../Error/Error';
 import UserContext from '../../contexts/userContext';
 import { JWT_TOKEN_KEY, LS_KEY_MOVIES } from '../../utils/constants';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-import { getProfile } from '../../utils/MainApi';
+import { mainApi } from '../../utils/MainApi';
 
-function App() { 
+function App() {
     const [currentUser, setCurrentUser] = useState({
         name: '',
         email: ''
     });
+
     const [loggedIn, setLoggedIn] = useState(
         localStorage.getItem(JWT_TOKEN_KEY) || false
     )
+
+    const api = mainApi({ setLoggedIn })    
     const [movies, setMovies] = useState(() => (
         JSON.parse(localStorage.getItem(LS_KEY_MOVIES)) || []
     ));
@@ -29,9 +32,13 @@ function App() {
 
     useEffect(() => {
         const checkUser = async () => {
-            const user = await getProfile();
-            if (Object.keys(user).length) {
-                setCurrentUser(user);
+            try {
+              const user = await api.getProfile()
+                if (user && Object.keys(user).length) {
+                    setCurrentUser(user);
+                }
+            } catch (e) {
+                console.debug({ e })
             }
         }
 
@@ -45,8 +52,8 @@ function App() {
             <div className="page">
                 <Routes>
                     <Route path="/" element={<Main loggedIn={loggedIn} />} />
-                    <Route path="/signin" element={<Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} />
-                    <Route path="/signup" element={<Register loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} />
+                    <Route path="/signin" element={<Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} api={api} />} />
+                    <Route path="/signup" element={<Register loggedIn={loggedIn} setLoggedIn={setLoggedIn} api={api} />} />
 
                     <Route path="/movies" element={
                         <ProtectedRoute
@@ -56,6 +63,7 @@ function App() {
                             savedMovies={savedMovies}
                             setSavedMovies={setSavedMovies}
                             loggedIn={loggedIn}
+                            api={api}
                         />}
                     />
                     <Route path="/saved-movies" element={
@@ -64,12 +72,13 @@ function App() {
                             movies={savedMovies}
                             setMovies={setSavedMovies}
                             loggedIn={loggedIn}
+                            api={api}
                         />} />
                     <Route path="/profile" element={
                         <ProtectedRoute
                             component={Profile}
                             loggedIn={loggedIn}
-                            setLoggedIn={setLoggedIn}
+                            api={api}
                         />}
                     />
                     <Route path="*" element={<Error />} />

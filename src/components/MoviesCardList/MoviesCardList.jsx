@@ -1,15 +1,17 @@
 import { useState, useEffect } from 'react';
 import './MoviesCardList.css';
 import MovieCard from '../MoviesCard/MoviesCard'
-import { LS_KEY_VISIBLE } from '../../utils/constants';
-
-const LG_INITIAL_CARD_COUNT = 16;
-const MD_INITIAL_CARD_COUNT = 8;
-const SM_INITIAL_CARD_COUNT = 5;
-
-const LG_LOAD_MORE_COUNT = 4;
-const MD_LOAD_MORE_COUNT = 2;
-const SM_LOAD_MORE_COUNT = 2;
+import { 
+    LS_KEY_VISIBLE, 
+    SM_LOAD_MORE_COUNT,
+    SM_INITIAL_CARD_COUNT,
+    MD_LOAD_MORE_COUNT,
+    MD_INITIAL_CARD_COUNT,
+    LG_LOAD_MORE_COUNT,
+    LG_INITIAL_CARD_COUNT,
+    LG_WIDTH,
+    MD_WIDTH,
+ } from '../../utils/constants';
 
 function MoviesCardList({ movies, savedMovies, onDelete, onSave }) {
     const [visibleCardCount, setVisibleCardCount] = useState(() => 
@@ -36,11 +38,11 @@ function MoviesCardList({ movies, savedMovies, onDelete, onSave }) {
     }, []);
 
     const calculateCardCount = () => {
-        if (windowWidth >= 1280) {
+        if (windowWidth >= LG_WIDTH) {
             return visibleCardCount + LG_LOAD_MORE_COUNT;
         }
 
-        if (windowWidth >= 768) {
+        if (windowWidth >= MD_WIDTH) {
             return visibleCardCount + MD_LOAD_MORE_COUNT;
         }
 
@@ -52,9 +54,9 @@ function MoviesCardList({ movies, savedMovies, onDelete, onSave }) {
     };
 
     useEffect(() => {
-        if (windowWidth >= 1280) {
+        if (windowWidth >= LG_WIDTH) {
             setVisibleCardCount(LG_INITIAL_CARD_COUNT);
-        } else if (windowWidth >= 768) {
+        } else if (windowWidth >= MD_WIDTH) {
             setVisibleCardCount(MD_INITIAL_CARD_COUNT);
         } else {
             setVisibleCardCount(SM_INITIAL_CARD_COUNT);

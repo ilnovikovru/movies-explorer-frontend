@@ -7,11 +7,15 @@
 
 .header-movies__menu-link {
   margin: 0;
-  font-weight: 500;
+  font-weight: 400;
   font-size: 13px;
   line-height: 1.38;
   text-decoration: none;
   color: #000;
+}
+
+.header-movies__menu-link_active {
+  font-weight: 500;
 }
 
 .header-movies__profile-button {
@@ -78,6 +82,10 @@
   text-decoration: none;
   color: #000;
   margin-bottom: 24px;
+}
+
+.header-movies__mobile-menu-link_active {
+  text-decoration: underline;
 }
 
 .header-movies__mobile-menu-profile-button {

@@ -71,6 +71,29 @@
     color: #FF3055;
 }
 
+.main__profile-save:disabled {
+    opacity: 0.6;
+}
+
+.main__profile-save {
+    background-color: #3456F3;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.2;
+    height: 45px;
+    margin-bottom: 16px;
+    border: 0;
+    border-radius: 3px;
+}
+
+.main__profile-form-error {
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 1.18;
+    text-align: center;
+}
+
 @media screen and (max-width: 768px) {
     .main__profile {
         margin-top: 254px;
@@ -103,6 +126,10 @@
         bottom: 23px;
         font-size: 12px;
         line-height: 1.25;
+    }
+
+    .main__profile-save {
+        width:100%;
     }
 
 }
