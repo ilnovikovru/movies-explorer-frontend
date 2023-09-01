@@ -1,0 +1,29 @@
+.main__saved-movies-cards-list {
+    display: grid;
+    grid-template-columns: repeat(4, calc(25% - 10px));
+    grid-template-rows: repeat(1, 230px);
+    gap: 38px 20px;
+    list-style-type: none;
+    margin: 0;
+    padding: 0 0 155px;
+}
+
+@media screen and (max-width: 1088px) {
+    .main__saved-movies-cards-list {
+        grid-template-columns: repeat(2, calc(50% - 15px));
+        grid-template-rows: repeat(1, 269px);
+        gap: 30px 30px;
+        padding: 0 0 102px;
+        padding-left: calc(50% - 354px);	
+        padding-right: calc(50% - 354px);
+    }
+}
+
+@media screen and (max-width: 617px) {
+    .main__saved-movies-cards-list {
+        grid-template-columns: repeat(1, 100%);
+        grid-template-rows: repeat(2, 240px);
+        gap: 40px 30px;
+        padding: 0 0 126px;
+    }
+}
